@@ -1,6 +1,8 @@
 import 'dart:async';
 
-enum counterevent { Increment, Decrement, Reset , Set }
+import 'countre_cli.dart';
+
+enum counterevent { Increment, Decrement, Reset, Set }
 
 class Counterbloc {
   int _counter = 0;
@@ -15,13 +17,15 @@ class Counterbloc {
   Sink<int> get counterSink => _counterController.sink;
 
   Counterbloc() {
-    eventStream.listen((counterevent event) {
+    eventStream.listen((counterevent event) async {
       if (event == counterevent.Increment) {
-        counterSink.add(++_counter);
+        _counter = await fetchCounter("inc");
+        counterSink.add(_counter);
       } else if (event == counterevent.Decrement) {
-        counterSink.add(--_counter);
+        _counter = await fetchCounter("dec");
+        counterSink.add(_counter);
       } else if (event == counterevent.Reset) {
-        _counter = 0;
+        _counter = await fetchCounter("reset");
         counterSink.add(_counter);
       }
     });
