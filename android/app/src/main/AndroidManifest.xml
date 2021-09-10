@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.test_bloc_counter4">
    <application
-        android:label="test_bloc_counter4"
+       android:usesCleartextTraffic="true"
+        android:label="test_bloc_counter_cli"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
