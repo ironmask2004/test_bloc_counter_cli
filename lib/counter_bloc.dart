@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'countre_cli.dart';
+import 'counter_cli.dart';
 
 enum counterevent { Increment, Decrement, Reset, Set }
 
