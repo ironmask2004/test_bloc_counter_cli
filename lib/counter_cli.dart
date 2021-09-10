@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 
 Future<int> fetchCounter(String Operation) async {
   print('Getting Counter');
-  var url = new Uri.http("localhost:8083", "counter/"+Operation); // working web client
+  var url = new Uri.http("192.168.1.5:8083", "counter/"+Operation); // working web client
   print(url);
   var client = http.Client();
   http.Response response = await client.get(url);
