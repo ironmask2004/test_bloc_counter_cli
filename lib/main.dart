@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'counter_bloc.dart';
+import 'counterLocal_bloc.dart';
+import 'counterEvent.dart';
 
 void main() {
   runApp(MyApp());
@@ -30,6 +32,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   Counterbloc _counterBloc = Counterbloc();
+  CounterLocalBloc _counterLocalBloc = CounterLocalBloc();
 
   //int _counter = 0;
   void dispose() {
@@ -40,6 +43,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    _counterLocalBloc.eventSink.add(counterevent.Reset);
+    _counterBloc.eventSink.add(counterevent.Set);
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -51,9 +56,15 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               'You have pushed the button this many times:',
             ),
-            Text(
-              'will Get Counter Value From Server:',
-              style: Theme.of(context).textTheme.headline6,
+            StreamBuilder(
+              stream: _counterLocalBloc.counterLocalStream,
+              initialData: 0,
+              builder: (context, snapshot) {
+                return (Text(
+                  snapshot.data.toString(),
+                  style: Theme.of(context).textTheme.headline4,
+                ));
+              },
             ),
             StreamBuilder(
               stream: _counterBloc.counterStream,
@@ -73,6 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           FloatingActionButton(
             onPressed: () {
+              _counterLocalBloc.eventSink.add(counterevent.Increment);
               _counterBloc.eventSink.add(counterevent.Increment);
             },
             tooltip: 'Increment',
@@ -80,17 +92,26 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           FloatingActionButton(
             onPressed: () {
+              _counterLocalBloc.eventSink.add(counterevent.Reset);
               _counterBloc.eventSink.add(counterevent.Reset);
             },
-            tooltip: 'Increment',
+            tooltip: 'Rest',
             child: Icon(Icons.reset_tv),
           ),
           FloatingActionButton(
             onPressed: () {
+              _counterLocalBloc.eventSink.add(counterevent.Decrement);
               _counterBloc.eventSink.add(counterevent.Decrement);
             },
-            tooltip: 'Increment',
+            tooltip: 'Decrement',
             child: Icon(Icons.remove),
+          ),
+          FloatingActionButton(
+            onPressed: () {
+              _counterBloc.eventSink.add(counterevent.Set);
+            },
+            tooltip: 'Refresh',
+            child: Icon(Icons.refresh_outlined),
           ),
         ],
       ), // This trailing comma makes auto-formatting nicer for build methods.

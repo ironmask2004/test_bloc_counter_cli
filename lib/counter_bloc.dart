@@ -1,11 +1,11 @@
 import 'dart:async';
-
+import 'counterEvent.dart';
 import 'counter_cli.dart';
 
-enum counterevent { Increment, Decrement, Reset, Set }
 
 class Counterbloc {
-  int _counter = 0;
+
+  int _counter = 0; //int.parse( fetchCounter("reset").toString());
 
   StreamController<counterevent> _eventController =
       StreamController<counterevent>();
@@ -16,7 +16,8 @@ class Counterbloc {
   Stream<int> get counterStream => _counterController.stream;
   Sink<int> get counterSink => _counterController.sink;
 
-  Counterbloc() {
+  Counterbloc()   {
+    print("test srv");
     eventStream.listen((counterevent event) async {
       if (event == counterevent.Increment) {
         _counter = await fetchCounter("inc");
@@ -26,6 +27,9 @@ class Counterbloc {
         counterSink.add(_counter);
       } else if (event == counterevent.Reset) {
         _counter = await fetchCounter("reset");
+        counterSink.add(_counter);
+      } else if (event == counterevent.Set) {
+        _counter = await fetchCounter("");
         counterSink.add(_counter);
       }
     });
