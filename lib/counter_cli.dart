@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-const String HostServer = "localhost";
+const String HostServer = "192.168.0.3";
 const String HostPort = "8083";
 
 Future<int> fetchCounter(String Operation) async {
