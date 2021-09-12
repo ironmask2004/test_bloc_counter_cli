@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-const String HostServer = "192.168.0.3";
-const String HostPort = "8083";
+const String HostServer = '192.168.1.5';
+const String HostPort = '8083';
 
 Future<int> fetchCounter(String Operation) async {
   print("Open Firewall Port form Systemctl stop firewall");

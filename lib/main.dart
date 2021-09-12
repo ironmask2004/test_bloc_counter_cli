@@ -68,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             StreamBuilder(
               stream: _counterBloc.counterStream,
-              initialData: 0,
+              //initialData: 0,
               builder: (context, snapshot) {
                 return (Text(
                   snapshot.data.toString(),

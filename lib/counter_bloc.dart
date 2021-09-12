@@ -17,7 +17,7 @@ class Counterbloc {
   Sink<int> get counterSink => _counterController.sink;
 
   Counterbloc()   {
-    print("test srv");
+    print("test counter srv");
     eventStream.listen((counterevent event) async {
       if (event == counterevent.Increment) {
         _counter = await fetchCounter("inc");
