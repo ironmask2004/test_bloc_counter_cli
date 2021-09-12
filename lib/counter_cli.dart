@@ -9,11 +9,13 @@ Future<int> fetchCounter(String Operation) async {
   print("Open Firewall Port form Systemctl stop firewall");
 
   print('Getting Counter');
-  var url =
-      new Uri.http(HostServer  +":"+HostPort, "counter/" + Operation); // working web client
+  var url = new Uri.http(HostServer + ":" + HostPort,
+      "counter/" + Operation); // working web client
   print("GET -----" + url.toString() + "--------");
   var client = http.Client();
-  http.Response response = await client.get(url);
+  http.Response response = await client.get(url, headers: <String, String>{
+    'Content-Type': 'application/json; charset=UTF-8',
+  });
 
   print("returned " + response.body.toString());
   if (response.statusCode == 200) {
@@ -27,7 +29,8 @@ Future<int> setCounter(String setvalue) async {
   print("Open Firewall Port form Systemctl stop firewall");
 
   print('Setting Counter to 999');
-  var url = new Uri.http(HostServer +":"+HostPort, "counter/set/"); // working web client
+  var url = new Uri.http(
+      HostServer + ":" + HostPort, "counter/set/"); // working web client
   print("POST -----" + url.toString() + "--------");
 
   var client = http.Client();
