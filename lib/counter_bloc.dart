@@ -26,9 +26,12 @@ class Counterbloc {
         _counter = await fetchCounter("dec");
         counterSink.add(_counter);
       } else if (event == counterevent.Reset) {
-        _counter = await fetchCounter("reset");
+        _counter = await setCounter("0");
         counterSink.add(_counter);
       } else if (event == counterevent.Set) {
+        _counter = await setCounter("999");
+        counterSink.add(_counter);
+      } else if (event == counterevent.Current) {
         _counter = await fetchCounter("");
         counterSink.add(_counter);
       }

@@ -44,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     _counterLocalBloc.eventSink.add(counterevent.Reset);
-    _counterBloc.eventSink.add(counterevent.Set);
+    _counterBloc.eventSink.add(counterevent.Current);
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -108,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           FloatingActionButton(
             onPressed: () {
-              _counterBloc.eventSink.add(counterevent.Set);
+              _counterBloc.eventSink.add(counterevent.Current);
             },
             tooltip: 'Refresh',
             child: Icon(Icons.refresh_outlined),
